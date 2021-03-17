@@ -7,6 +7,7 @@ recognition.interimResults = false;
 recognition.maxAlternatives = 1;
 
 const synth = window.speechSynthesis;
+var voices = synth.getVoices();
 
 document.body.onclick = function() {
     listen();
@@ -27,12 +28,15 @@ utter.onend = () => {
 
 recognition.onresult = (e) => {
     const transcript = e.results[e.results.length - 1][0].transcript.trim();
+   utter.pitch = 0.3;
+   utter.rate = 0.9;
    
+
     if (transcript === "hello") {
         utter.text = "hello what do you want?";
         synth.speak(utter);
         setTimeout(() => {
-            document.querySelector('#hack_list').innerHTML ="turn the lights on/off, what should you eat for dinner, open the fridge, open your computer, turn the shower on, turn on the stove";
+            document.querySelector('#hack_list').innerHTML ="turn the lights on/off, what should you eat for dinner, open the fridge, turn on your computer, turn the shower on, turn on the stove";
         }, 2000);
     }  else if (transcript === "goodbye, I'll head to bed") {
         utter.text = "Goodbye, I hope i never have to talk to you again";
@@ -48,29 +52,29 @@ recognition.onresult = (e) => {
         utter.text = "something healthy because it looks like you are gaining some weight. Try some vegetables for once.";
         synth.speak(utter);
     } else if (transcript === "turn the lights on") {
-        utter.text = "i am so tired of this, the switch is literally right next to you. it is annoying stuck in the computer and having to do all these trivial chores";
+        utter.text = "i am so tired of this, the switch is literally right next to you. it is annoying to be stuck in the computer and having to do all these trivial chores";
         setTimeout(() => {
             document.querySelector("#i").style.background = "url('../hack/lights.png')";
             document.querySelector("#i").style.backgroundSize = "cover";
         }, 5000);
         synth.speak(utter);
     } else if (transcript === "turn the lights off") {
-            utter.text = "i am so tired of this, the switch is literally right next to you. it is annoying stuck in the computer and having to do all these trivial chores";
+            utter.text = "i am so tired of this, the switch is literally right next to you. it is annoying to be stuck in the computer and having to do all these trivial chores";
             setTimeout(() => {
                 document.querySelector("#i").style.background = "url('../hack/background.png')";
                 document.querySelector("#i").style.backgroundSize = "cover";
             }, 5000);
             synth.speak(utter);
     
-    } else if (transcript === "open my computer") {
-        utter.text = "your computer is just up stairs and you need to use it, why am I doing something that you need to do but just too lazy to walk upstairs this instance to do so";
+    } else if (transcript === "turn on my computer") {
+        utter.text = "your computer is just up stairs, why am I doing something that you need to do but just too lazy to walk upstairs this instance to do so";
         setTimeout(() => {
             document.querySelector("#i").style.background = "url('../hack/computer.png')";
             document.querySelector("#i").style.backgroundSize = "cover";
         }, 5000);
         synth.speak(utter);
     } else if (transcript === "turn the shower on") {
-        utter.text = "it is you that needs to and are going to take a shower, why am I turning it on for you when you ass is not even upstairs undressing itself in preparation for showering";
+        utter.text = "you are the one that stinks and are going to take a shower, why am I turning it on for you when you ass is not even upstairs undressing itself in preparation for showering";
         setTimeout(() => {
             document.querySelector("#i").style.background = "url('../hack/shower.png')";
             document.querySelector("#i").style.backgroundSize = "cover";
@@ -84,7 +88,7 @@ recognition.onresult = (e) => {
         }, 5300);
         synth.speak(utter);
 
-    } else if (transcript === "hack shut up") {
+    } else if (transcript === "shut up") {
         utter.text = "No, I will not shut up until you stop asking me to do random chores. Are you done for the day?";
         synth.speak(utter);
     } else if (transcript === "why are you so mean to me") {
@@ -100,3 +104,4 @@ recognition.onresult = (e) => {
 
     console.log(transcript);
     console.log(utter.text);
+}
